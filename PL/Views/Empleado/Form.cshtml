@@ -1,0 +1,197 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Empleado/Empleado.js"></script>
+
+<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">Actualizar Empleado</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtIdEmpleado" placeholder="IdEmpleado" disabled="disabled" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtApellidoPaterno" placeholder="Apellido Paterno" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtApellidoMaterno" placeholder="Apellido Materno" />
+    </div>
+    <div class="form-group">
+        <select class="form-control" id="ddlDepartamentos"></select>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtEmail" placeholder="Email" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtSexo" placeholder="Sexo" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtTelefono" placeholder="Telefono" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtCelular" placeholder="Celular" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtFechaNacimiento" placeholder="Fecha de Nacimiento" />
+    </div>
+    <div class="form-group">
+        <select class="form-control" id="ddlEstados"></select>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtCodigoPostal" placeholder="Codigo Postal" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="txtPagoNomina" placeholder="Pago Nomina" />
+    </div>
+
+</form>
+               
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn glyphicon glyphicon-pencil" id="btnUpdate" onclick="Update()">Actualizar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalle</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>
+                                Acción completada con éxito
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" value="Regresar" data-dismiss="modal">Regresar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="panel-title">Empleado</h2>
+            <hr />
+        </div>
+    </div>
+
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtIdEmpleado" placeholder="IdEmpleado" disabled="disabled" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtApellidoPaterno" placeholder="Apellido Paterno" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtApellidoMaterno" placeholder="Apellido Materno" />
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="ddlDepartamentos"></select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtEmail" placeholder="Email" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtSexo" placeholder="Sexo" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtTelefono" placeholder="Telefono" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtCelular" placeholder="Celular" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtFechaNacimiento" placeholder="Fecha de Nacimiento" />
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="ddlEstados"></select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtCodigoPostal" placeholder="Codigo Postal" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txtPagoNomina" placeholder="Pago Nomina" />
+        </div>
+      
+    </form>
+    <div class="row">
+        <div class="col-md-1">
+            <button  type="submit" class="btn btn-success" title="Agregar" onclick="Add()">
+                Agregar
+            </button>
+        </div>
+        <div class="col-md-1">
+            <button id="boton" class="btn btn-danger" title="Cancelar">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalle</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>
+                                Acción completada con éxito
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            @Html.ActionLink("Regresar", "GetAll", "Empleado", htmlAttributes: new { @class = "btn btn-primary  btn-lg" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
